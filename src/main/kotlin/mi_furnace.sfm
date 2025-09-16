@@ -1,0 +1,46 @@
+Name "MI Coke Oven"
+
+-- Power
+Every tick do
+  Input fe:: from PowerEntanglo bottom side
+  Output fe:: to each PowerMachine
+End
+
+-- Fluids
+Every 20 ticks do
+  Input fluid::steam from SteamEntanglo bottom side
+  Output fluid:: to FluidInputHatch
+End
+
+-- Coke Oven
+Every 20 ticks do
+  Input coal from CoalBarrel
+  Output to ItemInputHatch
+Forget
+  Input coke from ItemOutputHatch
+  Output to CokeDustBarrel
+Forget
+  Input fluid:: from FluidOutputHatch
+  Output fluid:: to LubricantMixer
+Forget
+  Input fluid:: from LubricantMixer
+  Output fluid:: to LubricantEntanglo top side
+Forget
+  Input from RedstoneBarrel
+  Output retain 64 to LubricantMixer
+End
+
+-- Blast Furnace
+Every 20 ticks do
+  Input fluid::raw_synthetic_oil from RawSyntheticOilEntanglo bottom side
+  Output fluid:: to BlastOilInputHatch
+Forget
+  Input fluid::synthetic_oil from BlastFluidOutputHatch
+  Output fluid:: to SyntheticOilMixer
+Forget
+  Input from PaperBarrel
+  Output retain 64 to SyntheticOilMixer
+Forget
+  Input rubber_sheet from SyntheticOilMixer
+  Output to RubberSheetBarrel
+End
