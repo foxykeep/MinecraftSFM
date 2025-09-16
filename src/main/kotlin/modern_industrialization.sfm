@@ -1,0 +1,116 @@
+Name "MI Compressor"
+
+-- Liquids
+Every 20 ticks do
+  Input fluid:: from SteamEntanglo bottom side
+  Output fluid:: to each SteamMachine
+Forget
+  Input fluid:: from LubricantEntanglo bottom side
+  Output 1 fluid:: to LubricantMachine round robin by block
+Forget
+  Input fluid:: from WaterEntanglo bottom side
+  Output fluid:: to WaterMachine
+End
+
+-- Copper
+Every 20 ticks do
+  Input copper_ingot from ControllerInput
+  Output to each CopperPlateMachine,CopperRodMachine
+Forget
+  Input copper_rod from ControllerMI
+  Output to CopperRingMachine,CopperBoltMachine
+Forget
+  Input copper_plate from ControllerMI
+  Output to CopperWireMachine,CopperCurvedMachine
+Forget
+  Input copper_wire from ControllerMI
+  Output to CopperFineWireMachine
+Forget
+  Input copper_ring from CopperRingMachine
+  Input copper_plate from CopperPlateMachine
+  Input copper_curved_plate from CopperCurvedMachine
+  Input copper_rod from CopperRodMachine
+  Input copper_bolt from CopperBoltMachine
+  Input copper_wire from CopperWireMachine
+  Input copper_fine_wire from CopperFineWireMachine
+  Output to ControllerMI
+End
+
+-- Bronze
+Every 20 ticks do
+  Input bronze_ingot from ControllerInput
+  Output to each BronzePlateMachine,BronzeRodMachine
+Forget
+  Input bronze_rod from ControllerMI
+  Output to BronzeRingMachine,BronzeBoltMachine
+Forget
+  Input bronze_plate from ControllerMI
+  Output to BronzeCurvedMachine
+Forget
+  Input bronze_ring from BronzeRingMachine
+  Input bronze_plate from BronzePlateMachine
+  Input bronze_curved_plate from BronzeCurvedMachine
+  Input bronze_rod from BronzeRodMachine
+  Input bronze_bolt from BronzeBoltMachine
+  Output to ControllerMI
+End
+
+-- Steel
+Every 20 ticks do
+  Input steel_ingot from ControllerInput
+  Output to each SteelPlateMachine,SteelRodMachine
+Forget
+  Input steel_rod from ControllerMI
+  Output to SteelRingMachine,SteelBoltMachine
+Forget
+  Input steel_plate from ControllerMI
+  Output to SteelCurvedMachine
+Forget
+  Input steel_ring from SteelRingMachine
+  Input steel_plate from SteelPlateMachine
+  Input steel_curved_plate from SteelCurvedMachine
+  Input steel_rod from SteelRodMachine
+  Input steel_bolt from SteelBoltMachine
+  Output to ControllerMI
+End
+
+-- Gold
+Every 20 ticks do
+  Input gold_ingot from ControllerInput
+  Output to each GoldPlateMachine,GoldRodMachine
+Forget
+  Input gold_rod from ControllerMI
+  Output to GoldRingMachine,GoldBoltMachine
+Forget
+  Input gold_plate from ControllerMI
+  Output to GoldCurvedMachine
+Forget
+  Input gold_ring from GoldRingMachine
+  Input gold_plate from GoldPlateMachine
+  Input gold_curved_plate from GoldCurvedMachine
+  Input gold_rod from GoldRodMachine
+  Input gold_bolt from GoldBoltMachine
+  Output to ControllerMI
+End
+
+-- Macerator
+Every 20 ticks do
+  Input brick from ControllerInput
+  Output to BrickDustMacerator
+Forget
+  Input coke from ControllerMI
+  Output to CokeDustMacerator
+Forget
+  Input brick_dust from BrickDustMacerator
+  Input coke_dust from CokeDustMacerator
+  Output to ControllerMI
+End
+
+-- Mixer
+Every 20 ticks do
+  Input coke_dust from ControllerMI
+  Output to RawSyntheticOilMixer
+Forget
+  Input fluid::raw_synthetic_oil from RawSyntheticOilMixer
+  Output fluid:: to RawSyntheticOilEntanglo top side
+End
