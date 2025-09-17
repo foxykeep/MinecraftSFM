@@ -130,16 +130,12 @@ Forget
   Input aluminum_plate from ControllerMI
   Output to AluminumWireMachine,AluminumCurvedMachine
 Forget
-  Input aluminum_wire from ControllerMI
-  Output to AluminumFineWireMachine
-Forget
   Input aluminum_ring from AluminumRingMachine
   Input aluminum_plate from AluminumPlateMachine
   Input aluminum_curved_plate from AluminumCurvedMachine
   Input aluminum_rod from AluminumRodMachine
   Input aluminum_bolt from AluminumBoltMachine
   Input aluminum_wire from AluminumWireMachine
-  Input aluminum_fine_wire from AluminumFineWireMachine
   Output to ControllerMI
 End
 
@@ -170,6 +166,43 @@ Forget
 Forget
   Input battery_alloy_plate from BatteryAlloyPlateMachine
   Input battery_alloy_curved_plate from BatteryAlloyCurvedMachine
+  Output to ControllerMI
+End
+
+-- Cupronickel
+Every 20 ticks do
+  Input copper_dust, nickel_dust from ControllerInput
+  Output retain 64 each to CupronickelMixer
+Forget
+  Input cupronickel_dust from CupronickelMixer
+  Output to Furnace  top side
+Forget
+  Input cupronickel_ingot from ControllerMI
+  Output to CupronickelPlateMachine
+Forget
+  Input cupronickel_plate from ControllerMI
+  Output to CupronickelWireMachine
+Forget
+  Input cupronickel_wire from ControllerMI
+  Output to CupronickelWireMagneticMachine
+Forget
+  Input cupronickel_plate from CupronickelPlateMachine
+  Input cupronickel_wire from CupronickelWireMachine
+  Input cupronickel_wire_magnetic from CupronickelWireMagneticMachine
+  Output to ControllerMI
+End
+
+-- Silicon
+Every 20 ticks do
+  Input silicon_block from ControllerInput
+  Output to SiliconUnpacker
+Forget
+  Input silicon_ingot from ControllerMI
+  Output to SiliconPlateMachine,SiliconDustMachine
+Forget
+  Input modern_industrialization:silicon_ingot from SiliconUnpacker
+  Input silicon_plate from SiliconPlateMachine
+  Input silicon_dust from SiliconDustMachine
   Output to ControllerMI
 End
 
