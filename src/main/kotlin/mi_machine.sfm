@@ -224,13 +224,14 @@ Every 20 ticks do
   Input raw_antimony from ControllerInput
   Output to AntimonyDustMacerator
 Forget
-  Input antimony_dust,lead_dust from AntimonyDustMacerator, ControllerInput
+  Input antimony_dust,lead_dust from ControllerMI, ControllerInput
   Output retain 64 each to BatteryAlloyMixer
 Forget
   Input battery_alloy_dust from BatteryAlloyMixer
   Output to Furnace top side
 Forget
   Input from Furnace bottom side
+  Input antimony_dust from AntimonyDustMacerator
   Output to ControllerMI
 End
 
@@ -241,4 +242,55 @@ Every 20 ticks do
 Forget
   Input fluid::raw_synthetic_oil from RawSyntheticOilMixer
   Output fluid:: to RawSyntheticOilEntanglo top side
+End
+
+-- Fuel
+Every 20 ticks do
+  Input fluid::crude_oil from ControllerInput
+  Output fluid:: to SulfuricLightFuelMachine
+Forget
+  Input fluid::sulfuric_light_fuel from SulfuricLightFuelMachine
+  Output fluid:: to ControllerMI
+Forget
+  Input fluid::sulfuric_light_fuel, fluid::hydrogen from ControllerMI
+  Output retain 15000 each fluid:: to LightFuelMachine
+Forget
+  Input fluid::light_fuel, fluid::sulfuric_acid from LightFuelMachine
+  Output fluid:: to ControllerMI
+Forget
+  Input fluid::light_fuel, from ControllerMI
+  Input fluid::steam from SteamEntanglo bottom side
+  Output 3000 each fluid:: to SteamCrackedLightFuelMachine
+Forget
+  Input fluid::steam_cracked_light_fuel from SteamCrackedLightFuelMachine
+  Output fluid:: to ControllerMI
+Forget
+  Input fluid::steam_cracked_light_fuel from ControllerMI
+  Output fluid:: to EthyleneMachine
+Forget
+  Input fluid::ethylene from EthyleneMachine
+  Output fluid:: to ControllerMI
+End
+
+-- LiquidElement
+Every 20 ticks do
+  Input fluid:: from WaterEntanglo bottom side
+  Output fluid:: to OxygenHydrogenMachine
+Forget
+  Input fluid:: except fluid::water from OxygenHydrogenMachine
+  Output fluid:: to ControllerMI
+End
+
+
+-- DopedSiliconPlate
+Every 20 ticks do
+  Input silicon_plate,aluminum_tiny_dust from ControllerMI,ControllerInput
+  Output retain 32 each to NDopedSiliconPlateMachine
+Forget
+  Input silicon_plate,antimony_tiny_dust from ControllerMI,ControllerInput
+  Output retain 32 each to PDopedSiliconPlateMachine
+Forget
+Forget
+  Input silicon_n_doped_plate, silicon_p_doped_plate from NDopedSiliconPlateMachine, PDopedSiliconPlateMachine
+  Output to ControllerMI
 End
