@@ -11,7 +11,7 @@ Every 20 ticks do
   Input fluid:: from SteamEntanglo bottom side
   Output fluid:: to each SteamMachine
 Forget
-  Input fluid:: from LubricantEntanglo bottom side
+  Input fluid::lubricant from ControllerMI
   Output retain 1000 fluid:: to LubricantMachine round robin by block
 Forget
   Input fluid:: from WaterEntanglo bottom side
@@ -206,6 +206,54 @@ Forget
   Output to ControllerMI
 End
 
+-- Stainless Steel
+Every 20 ticks do
+  Input stainless_steel_ingot from ControllerMI
+  Output to each StainlessSteelPlateMachine,StainlessSteelRodMachine
+Forget
+  Input stainless_steel_rod from ControllerMI
+  Output to StainlessSteelRingMachine,StainlessSteelBoltMachine
+Forget
+  Input stainless_steel_plate from ControllerMI
+  Output to StainlessSteelCurvedMachine
+Forget
+  Input stainless_steel_rod, neodymium_dust from ControllerMI
+  Output retain 32 each to StainlessSteelMagneticRodMachine
+Forget
+  Input stainless_steel_ring from StainlessSteelRingMachine
+  Input stainless_steel_plate from StainlessSteelPlateMachine
+  Input stainless_steel_curved_plate from StainlessSteelCurvedMachine
+  Input stainless_steel_rod from StainlessSteelRodMachine
+  Input stainless_steel_bolt from StainlessSteelBoltMachine
+  Input stainless_steel_rod_magnetic from StainlessSteelMagneticRodMachine
+  Output to ControllerMI
+End
+
+-- Kanthal
+Every 20 ticks do
+  Input stainless_steel_dust, chromium_dust, aluminum_dust from ControllerInput,ControllerMI
+  Output retain 64 each to each KanthalDustMachine
+Forget
+  Input kanthal_dust from KanthalDustMachine
+  Output to ControllerMI
+Forget
+  Input kanthal_ingot from ControllerMI
+  Output to KanthalPlateMachine
+Forget
+  Input kanthal_plate from ControllerMI
+  Output to KanthalWireMachine
+Forget
+  Input kanthal_plate from KanthalPlateMachine
+  Input kanthal_wire from KanthalWireMachine
+  Output to ControllerMI
+End
+
+-- Annealed Copper
+
+----------
+--- Other
+----------
+
 -- Macerator
 Every 20 ticks do
   Input brick from ControllerInput
@@ -235,13 +283,38 @@ Forget
   Output to ControllerMI
 End
 
--- Mixer
+-- RawSyntheticOil
 Every 20 ticks do
-  Input coke_dust from ControllerMI
+  Input dust_coal from ControllerInput
+  Output to CarbonDustMachine
+Forget
+  Input carbon_dust from CarbonDustMachine
+  Output to ControllerMI
+Forget
+  Input carbon_dust from ControllerMI
   Output to RawSyntheticOilMixer
 Forget
   Input fluid::raw_synthetic_oil from RawSyntheticOilMixer
-  Output fluid:: to RawSyntheticOilEntanglo top side
+  Output fluid:: to ControllerMI top side
+End
+
+-- StainlessSteelDust
+Every 20 ticks do
+  Input manganese_dust, iron_dust, chromium_dust, nickel_dust from ControllerInput
+  Output retain 64 each to each StainlessSteelDustMachine
+Forget
+  Input stainless_steel_dust from StainlessSteelDustMachine
+  Output to ControllerMI
+End
+
+-- Monazite Dust Management
+Every 20 ticks do
+  Input monazite_dust from ControllerInput
+  Output retain 64 to MonaziteDustCentrifuge
+Forget
+  Input item:: except monazite_dust from MonaziteDustCentrifuge
+  Input fluid:: from MonaziteDustCentrifuge
+  Output item::, fluid:: to ControllerMI
 End
 
 -- Fuel
@@ -249,26 +322,24 @@ Every 20 ticks do
   Input fluid::crude_oil from ControllerInput
   Output fluid:: to SulfuricLightFuelMachine
 Forget
-  Input fluid::sulfuric_light_fuel from SulfuricLightFuelMachine
-  Output fluid:: to ControllerMI
-Forget
   Input fluid::sulfuric_light_fuel, fluid::hydrogen from ControllerMI
   Output retain 15000 each fluid:: to LightFuelMachine
-Forget
-  Input fluid::light_fuel, fluid::sulfuric_acid from LightFuelMachine
-  Output fluid:: to ControllerMI
 Forget
   Input fluid::light_fuel, from ControllerMI
   Input fluid::steam from SteamEntanglo bottom side
   Output 3000 each fluid:: to SteamCrackedLightFuelMachine
 Forget
-  Input fluid::steam_cracked_light_fuel from SteamCrackedLightFuelMachine
-  Output fluid:: to ControllerMI
-Forget
   Input fluid::steam_cracked_light_fuel from ControllerMI
   Output fluid:: to EthyleneMachine
 Forget
+  Input fluid::ethylene, chromium_tiny_dust from ControllerMI, ControllerInput
+  Output item::, fluid:: to PolyethyleneMachine
+Forget
+  Input fluid::sulfuric_light_fuel from SulfuricLightFuelMachine
+  Input fluid::light_fuel, fluid::sulfuric_acid from LightFuelMachine
+  Input fluid::steam_cracked_light_fuel from SteamCrackedLightFuelMachine
   Input fluid::ethylene from EthyleneMachine
+  Input fluid::polyethylene from PolyethyleneMachine
   Output fluid:: to ControllerMI
 End
 

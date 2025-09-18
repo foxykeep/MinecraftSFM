@@ -1,0 +1,50 @@
+Name "MI Furnace"
+
+-- Power
+Every tick do
+  Input fe:: from PowerEntanglo bottom side
+  Output fe:: to each PowerMachine
+End
+
+-- Digital Circuit Board
+Every 20 ticks do
+  Input item::, fluid:: from MEInterface, ControllerMI
+  Output retain 6 aluminum_cable,
+      retain 1 silicon_battery,
+      retain 1 electronic_circuit_board,
+      retain 4 stainless_steel_plate
+        to DigitalCircuitBoardMachine
+  Output retain 750 fluid::polyethylene
+        to DigitalCircuitBoardMachine
+Forget
+  Input digital_circuit_board from DigitalCircuitBoardMachine
+  Output to ControllerMI
+End
+
+-- Basic Upgrade
+Every 20 ticks do
+  Input item:: from MEInterface, ControllerMI
+  Output retain 4 motor,
+      retain 2 robot_arm,
+      retain 2 conveyor,
+      retain 1 analog_circuit_board
+        to BasicUpgradeAssembler
+Forget
+  Input basic_upgrade from BasicUpgradeAssembler
+  Output to ControllerMI
+End
+
+-- Advanced Upgrade
+Every 20 ticks do
+  Input item::, fluid:: from MEInterface, ControllerMI
+  Output retain 4 basic_upgrade,
+      retain 2 large_motor,
+      retain 1 large_pump,
+      retain 1 electronic_circuit_board,
+        to AdvancedUpgradeAssembler
+  Output retain 1000 fluid::polyethylene
+        to AdvancedUpgradeAssembler
+Forget
+  Input advanced_upgrade from AdvancedUpgradeAssembler
+  Output to ControllerMI
+End

@@ -1,4 +1,4 @@
-Name "MI Coke Oven"
+Name "MI Furnace"
 
 -- Power
 Every tick do
@@ -14,33 +14,85 @@ End
 
 -- Coke Oven
 Every 20 ticks do
-  Input coal from CoalBarrel
+  Input minecraft:coal from ControllerInput
   Output to ItemInputHatch
 Forget
   Input coke from ItemOutputHatch
-  Output to CokeDustBarrel
+  Output to ControllerMI
 Forget
   Input fluid:: from FluidOutputHatch
   Output fluid:: to LubricantMixer
 Forget
   Input fluid:: from LubricantMixer
-  Output fluid:: to LubricantEntanglo top side
+  Output fluid:: to ControllerMI
 Forget
-  Input from RedstoneBarrel
+  Input redstone from ControllerInput
   Output retain 64 to LubricantMixer
 End
 
--- Blast Furnace
+-- Rubber Sheet
 Every 20 ticks do
-  Input fluid::raw_synthetic_oil from RawSyntheticOilEntanglo bottom side
+  Input fluid::raw_synthetic_oil from ControllerMI
   Output fluid:: to BlastOilInputHatch
 Forget
+  Input sulfur from ControllerInput
+  Output retain 16 to SyntheticRubberMixer
+Forget
   Input fluid::synthetic_oil from BlastFluidOutputHatch
-  Output fluid:: to SyntheticOilMixer
+  Output fluid:: to SyntheticRubberMixer
 Forget
-  Input from PaperBarrel
-  Output retain 64 to SyntheticOilMixer
+  Input fluid::synthetic_rubber from SyntheticRubberMixer
+  Output fluid:: to RubberSheetMixer
 Forget
-  Input rubber_sheet from SyntheticOilMixer
-  Output to RubberSheetBarrel
+  Input paper from ControllerInput
+  Output retain 64 to RubberSheetMixer
+Forget
+  Input rubber_sheet from RubberSheetMixer
+  Output to ControllerMI
+End
+
+-- Electric Blast Furnace - Stainless Steel
+Every 20 ticks do
+  Input stainless_steel_dust from ControllerMI
+  Output to StainlessSteelFurnaceInput
+Forget
+  Input from StainlessSteelFurnaceOutput
+  Output to StainlessHotIngotBarrel
+Forget
+  Input stainless_steel_hot_ingot from StainlessHotIngotBarrel
+  Output to StainlessSteelFreezerInput
+Forget
+  Input from StainlessSteelFreezerOutput
+  Output to ControllerMI
+End
+
+-- Electric Blast Furnace - Kanthal
+Every 20 ticks do
+  Input kanthal_dust from ControllerMI
+  Output to KanthalFurnaceInput
+Forget
+  Input from KanthalFurnaceOutput
+  Output to KanthalHotIngotBarrel
+Forget
+  Input kanthal_hot_ingot from KanthalHotIngotBarrel
+  Output to KanthalFreezerInput
+Forget
+  Input from KanthalFreezerOutput
+  Output to ControllerMI
+End
+
+-- Electric Blast Furnace - Annealed Copper
+Every 20 ticks do
+  Input copper_dust, fluid::oxygen from ControllerInput, ControllerMI
+  Output item:: to AnnealedCopperFurnaceItemInput
+  Output fluid:: to AnnealedCopperFurnaceFluidInput
+Forget
+  Input from AnnealedCopperFurnaceOutput
+  Output to AnnealedCopperHotIngotBarrel
+Forget
+  Input from AnnealedCopperHotIngotBarrel
+  Output to AnnealedCopperFreezerInput
+Forget
+  Input from AnnealedCopperFreezerOutput
+  Output to ControllerMI
 End
