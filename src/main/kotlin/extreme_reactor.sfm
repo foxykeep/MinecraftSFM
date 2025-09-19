@@ -1,0 +1,45 @@
+Name "Extreme Reactor Automation"
+
+-- Power
+Every tick do
+  Input fe:: from FEInput
+  Output fe:: to FluxAccessor each side
+Forget
+  Input fe:: from FluxAccessor
+  Output fe:: to FEPort
+End
+
+-- Item and fluid import
+Every 20 ticks do
+  Input item::, fluid:: from Interface
+  Output cyanite_ingot to CyanitePort
+  Output magentite_ingot to MagentitePort
+  Output uranium_ingot to UraniumPort
+  Output blutonium_ingot to BlutoniumPort
+  Output ludicrite_ingot to LudicritePort
+  Output ridiculite_ingot to RidiculitePort
+  Output benitoite_crystal to BenitoitePort
+  Output fluid::verderium to VerderiumFluidPort
+  Output fluid::water to WaterPort
+  Output fluid::cyanite to CyaniteFluidPort
+  Output fluid::magentite to MagentiteFluidPort
+  Output fluid::rossinite to RossiniteFluidPort
+End
+
+-- Reactor
+Every 20 ticks do
+  Input item::, fluid:: from ReactorOutput
+  Output item::, fluid:: to Interface
+End
+
+-- Fluidizer
+Every 20 ticks do
+    Input fluid:: from FluidizerOutput
+    Output fluid:: to Interface
+End
+ 
+-- Reprocessor
+Every 20 ticks do
+  Input from ReprocessorOutputPort
+  Output to Interface
+End

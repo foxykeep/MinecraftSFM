@@ -1,0 +1,15 @@
+Name "Seed Altar"
+
+Every 20 ticks do
+  Input *_seed_base from Barrel
+  Output retain 1 to Altar
+Forget
+  Input *_essence from Barrel
+  Output retain 1 to each EssencePedestal
+Forget
+  Input except *_essence, *_seed* from Barrel
+  Output retain 1 to each OtherPedestal
+Forget
+  Input from Altar
+  Output to Barrel
+End
