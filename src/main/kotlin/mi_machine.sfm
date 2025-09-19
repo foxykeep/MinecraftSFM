@@ -12,7 +12,7 @@ Every 20 ticks do
   Output fluid:: to each SteamMachine
 Forget
   Input fluid::lubricant from ControllerMI
-  Output retain 1000 fluid:: to LubricantMachine round robin by block
+  Output retain 2000 fluid:: to LubricantMachine round robin by block
 Forget
   Input fluid:: from WaterEntanglo bottom side
   Output fluid:: to each WaterMachine
@@ -175,7 +175,7 @@ Every 20 ticks do
   Output retain 64 each to CupronickelMixer
 Forget
   Input cupronickel_dust from CupronickelMixer
-  Output to Furnace  top side
+  Output to CupronickelFurnace top side
 Forget
   Input cupronickel_ingot from ControllerMI
   Output to CupronickelPlateMachine
@@ -189,6 +189,7 @@ Forget
   Input cupronickel_plate from CupronickelPlateMachine
   Input cupronickel_wire from CupronickelWireMachine
   Input cupronickel_wire_magnetic from CupronickelWireMagneticMachine
+  Input from CupronickelFurnace bottom side
   Output to ControllerMI
 End
 
@@ -248,7 +249,27 @@ Forget
   Output to ControllerMI
 End
 
--- Annealed Copper
+-- General
+Every 20 ticks do
+  Input *ingot*, diamond, emerald from ControllerMI, ControllerInput
+  Output to Compressor
+Forget
+  Input *plate*, *wire* from ControllerMI, ControllerInput
+  Output to Wiremill
+Forget
+  Input from Compressor
+  Input from Wiremill
+  Output to ControllerMI
+End
+
+-- Electrolyzer
+Every 20 ticks do
+    Input item::, fluid:: from ControllerMI, ControllerInput
+    Output item::, fluid:: to Electrolyzer
+Forget
+    Input item::, fluid:: from Electrolyzer
+    Output item::, fluid:: to ControllerMI
+End
 
 ----------
 --- Other
@@ -276,9 +297,9 @@ Forget
   Output retain 64 each to BatteryAlloyMixer
 Forget
   Input battery_alloy_dust from BatteryAlloyMixer
-  Output to Furnace top side
+  Output to BatteryAlloyFurnace top side
 Forget
-  Input from Furnace bottom side
+  Input from BatteryAlloyFurnace bottom side
   Input antimony_dust from AntimonyDustMacerator
   Output to ControllerMI
 End

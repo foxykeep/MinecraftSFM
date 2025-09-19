@@ -36,16 +36,16 @@ Every 20 ticks do
   Output fluid:: to BlastOilInputHatch
 Forget
   Input sulfur from ControllerInput
-  Output retain 16 to SyntheticRubberMixer
+  Output retain 16 to each SyntheticRubberMixer
 Forget
   Input fluid::synthetic_oil from BlastFluidOutputHatch
-  Output fluid:: to SyntheticRubberMixer
+  Output fluid:: to each SyntheticRubberMixer
 Forget
   Input fluid::synthetic_rubber from SyntheticRubberMixer
-  Output fluid:: to RubberSheetMixer
+  Output fluid:: to each RubberSheetMixer
 Forget
   Input paper from ControllerInput
-  Output retain 64 to RubberSheetMixer
+  Output retain 64 to each RubberSheetMixer
 Forget
   Input rubber_sheet from RubberSheetMixer
   Output to ControllerMI
@@ -57,9 +57,9 @@ Every 20 ticks do
   Output to StainlessSteelFurnaceInput
 Forget
   Input from StainlessSteelFurnaceOutput
-  Output to StainlessHotIngotBarrel
+  Output to HotIngotBarrel
 Forget
-  Input stainless_steel_hot_ingot from StainlessHotIngotBarrel
+  Input stainless_steel_hot_ingot from HotIngotBarrel
   Output to StainlessSteelFreezerInput
 Forget
   Input from StainlessSteelFreezerOutput
@@ -72,9 +72,9 @@ Every 20 ticks do
   Output to KanthalFurnaceInput
 Forget
   Input from KanthalFurnaceOutput
-  Output to KanthalHotIngotBarrel
+  Output to HotIngotBarrel
 Forget
-  Input kanthal_hot_ingot from KanthalHotIngotBarrel
+  Input kanthal_hot_ingot from HotIngotBarrel
   Output to KanthalFreezerInput
 Forget
   Input from KanthalFreezerOutput
@@ -88,9 +88,9 @@ Every 20 ticks do
   Output fluid:: to AnnealedCopperFurnaceFluidInput
 Forget
   Input from AnnealedCopperFurnaceOutput
-  Output to AnnealedCopperHotIngotBarrel
+  Output to HotIngotBarrel
 Forget
-  Input from AnnealedCopperHotIngotBarrel
+  Input annealed_copper_hot_ingot from HotIngotBarrel
   Output to AnnealedCopperFreezerInput
 Forget
   Input from AnnealedCopperFreezerOutput
