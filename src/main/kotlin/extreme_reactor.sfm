@@ -12,18 +12,18 @@ End
 -- Item and fluid import
 Every 20 ticks do
   Input item::, fluid:: from Interface
-  Output cyanite_ingot to CyanitePort
-  Output magentite_ingot to MagentitePort
-  Output uranium_ingot to UraniumPort
-  Output blutonium_ingot to BlutoniumPort
-  Output ludicrite_ingot to LudicritePort
-  Output ridiculite_ingot to RidiculitePort
-  Output benitoite_crystal to BenitoitePort
-  Output fluid::verderium to VerderiumFluidPort
-  Output fluid::water to WaterPort
-  Output fluid::cyanite to CyaniteFluidPort
-  Output fluid::magentite to MagentiteFluidPort
-  Output fluid::rossinite to RossiniteFluidPort
+  Output cyanite_ingot to each CyanitePort
+  Output magentite_ingot to each MagentitePort
+  Output uranium_ingot to each UraniumPort
+  Output blutonium_ingot to each BlutoniumPort
+  Output ludicrite_ingot to each LudicritePort
+  Output ridiculite_ingot to each RidiculitePort
+  Output benitoite_crystal to each BenitoitePort
+  Output insanite_ingot to each InsanitePort
+  Output fluid::verderium to each VerderiumFluidPort
+  Output fluid::cyanite to each CyaniteFluidPort
+  Output fluid::magentite to each MagentiteFluidPort
+  Output fluid::rossinite to each RossiniteFluidPort
 End
 
 -- Reactor
@@ -37,9 +37,18 @@ Every 20 ticks do
     Input fluid:: from FluidizerOutput
     Output fluid:: to Interface
 End
- 
+
 -- Reprocessor
 Every 20 ticks do
   Input from ReprocessorOutputPort
   Output to Interface
+End
+
+-- Final Reactor and Turbine
+Every redstone pulse do
+  Input fluid::water from Interface
+  Output fluid::water to WaterPort
+Forget
+  Input fluid:: from SteamOutputPort
+  Output 10010 fluid:: to each SteamInputPort
 End
