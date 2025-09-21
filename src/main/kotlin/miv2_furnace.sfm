@@ -1,0 +1,21 @@
+Name "Modern Industrialization v2 - Furnace"
+
+Every tick do
+    Input fe:: from Interface
+    Output fe:: to FEInputPort
+End
+
+-- Stainless Steel
+Every 20 ticks do
+  Input stainless_steel_dust from Controller
+  Output to StainlessSteelFurnaceInput
+Forget
+  Input from StainlessSteelFurnaceOutput
+  Output to Controller
+Forget
+  Input stainless_steel_hot_ingot from Controller
+  Output to StainlessSteelFreezerInput
+Forget
+  Input from StainlessSteelFreezerOutput
+  Output to Controller
+End

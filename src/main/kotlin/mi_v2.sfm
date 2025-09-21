@@ -1,0 +1,115 @@
+Every tick do
+    Input fe:: from Interface
+    Output fe:: to Compressor, Wiremill, Polarizer, AlloySmelter, BendingMachine, Unpacker,
+                    Macerator, Mixer, CuttingMachine, Centrifuge, Furnace
+End
+
+-- Boiler (Steam)
+Every 20 ticks do
+    Input coal_shard from Interface
+    Output retain 2 to each Boiler
+Forget
+    Input fluid::water from Interface
+    Output fluid:: to Boiler
+Forget
+    Input fluid::steam from Boiler
+    Output fluid:: to Interface
+End
+
+-- Compressor
+Every 20 ticks do
+    Input *ingot*, emerald, diamond from Interface, Controller
+    Output to Compressor
+Forget
+    Input from Compressor
+    Output to Controller
+End
+
+-- Bending Machine
+Every 20 ticks do
+    Input *plate*, *rod* from Controller
+    Output to BendingMachine
+Forget
+    Input from BendingMachine
+    Output to Controller
+End
+
+-- Cutting Machine
+Every 20 ticks do
+    Input *ingot*, *rod* from Controller, Interface
+    Output to CuttingMachine
+Forget
+    Input fluid::lubricant from Interface
+    Output retain 2000 fluid::lubricant to each CuttingMachine
+Forget
+    Input from CuttingMachine
+    Output to Controller
+End
+
+-- Wiremill
+Every 20 ticks do
+    Input *plate*, *wire* from Controller
+    Output to Wiremill
+Forget
+    Input from Wiremill
+    Output to Controller
+End
+
+-- Polarizer
+Every 20 ticks do
+    Input from Controller
+    Output to Polarizer
+Forget
+    Input from Polarizer
+    Output to Controller
+End
+
+-- Centrifuge
+Every 20 ticks do
+  Input from Interface
+  Output to Centrifuge
+Forget
+  Input fluid:: from Centrifuge
+  Output fluid:: to Controller
+End
+
+--Mixer
+Every 20 ticks do
+  Input fluid::, item:: from Controller,Interface
+  Output item:: to Mixer
+  Output fluid:: to LiquidMixer
+Forget
+ Input fluid::, item:: from Mixer
+ Output fluid:: to Interface
+ Output item:: to Controller
+End
+
+-- Unpacker
+Every 20 ticks do
+    Input from Interface
+    Output to Unpacker
+Forget
+    Input from Unpacker
+    Output to Controller
+End
+
+-- Macerator
+Every 20 ticks do
+    Input from Controller, Interface
+    Output to Macerator
+Forget
+    Input from Macerator
+    Output to Controller
+End
+
+-- Furnace
+Every 20 ticks do
+  Input battery_alloy_dust from Controller
+  Output to FurnaceBatteryAlloy top side
+Forget
+  Input cupronickel_dust from Controller
+  Output to FurnaceCupronickel top side
+Forget
+  Input from Furnace bottom side
+  Output to Controller
+End
