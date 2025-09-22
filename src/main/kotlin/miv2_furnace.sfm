@@ -19,3 +19,53 @@ Forget
   Input from StainlessSteelFreezerOutput
   Output to Controller
 End
+
+-- Kanthal
+Every 20 ticks do
+  Input kanthal_dust from Controller
+  Output to KanthalFurnaceInput
+Forget
+  Input from KanthalFurnaceOutput
+  Output to Controller
+Forget
+  Input kanthal_hot_ingot from Controller
+  Output to KanthalFreezerInput
+Forget
+  Input from KanthalFreezerOutput
+  Output to Controller
+End
+
+-- Annealed Copper
+Every 20 ticks do
+  Input copper_dust, fluid::oxygen from Interface
+  Output item:: to AnnealedCopperFurnaceItemInput
+  Output fluid:: to AnnealedCopperFurnaceFluidInput
+Forget
+  Input from AnnealedCopperFurnaceOutput
+  Output to Controller
+Forget
+  Input annealed_copper_hot_ingot from Controller
+  Output to AnnealedCopperFreezerInput
+Forget
+  Input from AnnealedCopperFreezerOutput
+  Output to Controller
+End
+
+-- Titanium
+Every 20 ticks do
+  Input raw_titanium, fluid::manganese_sulfuric_solution from Interface,Controller
+  Output item:: to TitaniumFurnaceItemInput
+  Output fluid:: to TitaniumFurnaceFluidInput
+Forget
+  Input from TitaniumFurnaceItemOutput
+  Output to Controller
+Forget
+  Input fluid:: from TitaniumFurnaceFluidOutput
+  Output fluid:: to Interface
+Forget
+  Input titanium_hot_ingot from Controller
+  Output to TitaniumFreezerInput
+Forget
+  Input from TitaniumFreezerOutput
+  Output to Controller
+End

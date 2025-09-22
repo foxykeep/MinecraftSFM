@@ -1,7 +1,9 @@
 Every tick do
     Input fe:: from Interface
-    Output fe:: to Compressor, Wiremill, Polarizer, AlloySmelter, BendingMachine, Unpacker,
-                    Macerator, Mixer, CuttingMachine, Centrifuge, Furnace
+    Output fe:: to Compressor, Wiremill, Polarizer, AlloySmelter,
+                   BendingMachine, Unpacker, ChemicalReactor,
+                   Macerator, Mixer, CuttingMachine, Centrifuge,
+                   Furnace, Electrolyzer
 End
 
 -- Boiler (Steam)
@@ -69,8 +71,9 @@ Every 20 ticks do
   Input from Interface
   Output to Centrifuge
 Forget
-  Input fluid:: from Centrifuge
-  Output fluid:: to Controller
+  Input fluid::,item:: from Centrifuge
+  Output fluid::, item:: to Controller
+  Output item:: to Interface
 End
 
 --Mixer
@@ -112,4 +115,24 @@ Forget
 Forget
   Input from Furnace bottom side
   Output to Controller
+End
+
+-- Electrolyzer
+Every 20 ticks do
+  Input item::, fluid:: from Controller, Interface
+  Output item::, fluid:: to Electrolyzer
+Forget
+  Input item::, fluid:: from Electrolyzer
+  Output item:: to Controller
+  Output fluid:: to Interface
+End
+
+-- Chemical Reactor
+Every 20 ticks do
+  Input item::, fluid:: from Interface, Controller
+  Output item::, fluid:: to ChemicalReactor
+Forget
+  Input item::, fluid:: from ChemicalReactor
+  Output item:: to Controller
+  Output fluid:: to Interface
 End
