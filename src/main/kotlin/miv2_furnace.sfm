@@ -69,3 +69,21 @@ Forget
   Input from TitaniumFreezerOutput
   Output to Controller
 End
+
+-- Distillery Tower - Crude Oil
+Every 20 ticks do
+  Input fluid::crude_oil from Interface
+  Output fluid:: to CrudeOilDistilleryInput
+Forget
+  Input fluid:: from CrudeOilDistilleryOutput
+  Output fluid:: to Interface
+End
+
+-- Distillery Tower - Naphtha
+Every 20 ticks do
+  Input fluid::steam_cracked_naphtha from Interface
+  Output fluid:: to NaphthaDistilleryInput
+Forget
+  Input fluid:: from NaphthaDistilleryOutput
+  Output fluid:: to Interface
+End

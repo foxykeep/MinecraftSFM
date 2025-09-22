@@ -1,7 +1,7 @@
 Every tick do
     Input fe:: from Interface
-    Output fe:: to Compressor, Wiremill, Polarizer, AlloySmelter,
-                   BendingMachine, Unpacker, ChemicalReactor,
+    Output fe:: to Compressor, Wiremill, Polarizer, ItemChemicalReactor,
+                   BendingMachine, Unpacker, FluidChemicalReactor,
                    Macerator, Mixer, CuttingMachine, Centrifuge,
                    Furnace, Electrolyzer
 End
@@ -130,9 +130,10 @@ End
 -- Chemical Reactor
 Every 20 ticks do
   Input item::, fluid:: from Interface, Controller
-  Output item::, fluid:: to ChemicalReactor
+  Output item:: to ItemChemicalReactor
+  Output fluid:: to FluidChemicalReactor
 Forget
-  Input item::, fluid:: from ChemicalReactor
+  Input item::, fluid:: from ItemChemicalReactor,FluidChemicalReactor
   Output item:: to Controller
   Output fluid:: to Interface
 End
