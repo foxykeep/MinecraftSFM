@@ -70,6 +70,15 @@ Forget
   Output to Controller
 End
 
+-- Rubber Sheet
+Every 20 ticks do
+  Input fluid::styrene_butadiene_rubber from Interface
+  Output fluid:: to RubberSheetFreezerInput
+Forget
+  Input from RubberSheetFreezerOutput
+  Output to Controller
+End
+
 -- Distillery Tower - Crude Oil
 Every 20 ticks do
   Input fluid::crude_oil from Interface

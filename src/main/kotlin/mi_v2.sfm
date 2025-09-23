@@ -2,8 +2,8 @@ Every tick do
     Input fe:: from Interface
     Output fe:: to Compressor, Wiremill, Polarizer, ItemChemicalReactor,
                    BendingMachine, Unpacker, FluidChemicalReactor,
-                   Macerator, Mixer, CuttingMachine, Centrifuge,
-                   Furnace, Electrolyzer
+                   Macerator, Mixer, CuttingMachine, Centrifuge, FluidCentrifuge,
+                   Furnace, Electrolyzer,AssemblerItem,AssemblerFluid
 End
 
 -- Boiler (Steam)
@@ -68,12 +68,14 @@ End
 
 -- Centrifuge
 Every 20 ticks do
-  Input from Interface
-  Output to Centrifuge
+  Input item::, fluid:: from Interface
+  Output item:: to Centrifuge
+  Output fluid:: to FluidCentrifuge
 Forget
-  Input fluid::,item:: from Centrifuge
+  Input fluid::,item:: from Centrifuge, FluidCentrifuge
   Output fluid::, item:: to Controller
-  Output item:: to Interface
+  Output fluid::, item:: to Interface
+  Output fluid::, item:: to Trash
 End
 
 --Mixer
@@ -123,8 +125,9 @@ Every 20 ticks do
   Output item::, fluid:: to Electrolyzer
 Forget
   Input item::, fluid:: from Electrolyzer
-  Output item:: to Controller
-  Output fluid:: to Interface
+  Output item::,fluid:: to Controller
+  Output item::,fluid:: to Interface
+  Output fluid::, item:: to Trash
 End
 
 -- Chemical Reactor
@@ -136,4 +139,14 @@ Forget
   Input item::, fluid:: from ItemChemicalReactor,FluidChemicalReactor
   Output item:: to Controller
   Output fluid:: to Interface
+End
+
+-- Assembler
+Every 20 ticks do
+  Input item::, fluid:: from Interface, Controller
+  Output item:: to AssemblerItem
+  Output fluid:: to AssemblerFluid
+Forget
+  Input item:: from AssemblerItem, AssemblerFluid
+  Output item:: to Controller
 End
