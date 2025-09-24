@@ -1,5 +1,5 @@
 Every tick do
-    Input fe:: from Interface
+    Input fe:: from Interface,FluxAccessor
     Output fe:: to Compressor, Wiremill, Polarizer, ItemChemicalReactor,
                    BendingMachine, Unpacker, FluidChemicalReactor,
                    Macerator, Mixer, CuttingMachine, Centrifuge, FluidCentrifuge,
@@ -38,7 +38,7 @@ End
 
 -- Cutting Machine
 Every 20 ticks do
-    Input *ingot*, *rod* from Controller, Interface
+    Input *ingot*, *rod*,monocrystalline_silicon from Controller, Interface
     Output to CuttingMachine
 Forget
     Input fluid::lubricant from Interface
