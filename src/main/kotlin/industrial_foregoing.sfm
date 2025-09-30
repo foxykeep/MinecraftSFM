@@ -1,0 +1,18 @@
+Name "Industrial Foregoing"
+
+Every tick do
+  Input fe:: from Interface
+  Output fe:: to BlockPlacer,FluidExtractor
+  Output fe:: to StasisChamber,DrillBase
+End
+
+Every 20 ticks do
+  Input acacia_log from Interface
+  Output retain 25 to BlockPlacer
+Forget
+  Input fluid:: from FluidExtractor
+  Output fluid:: to LatexTank top side
+Forget
+  Input fluid:: from FluidDrill bottom side
+  Output fluid:: to Interface
+End

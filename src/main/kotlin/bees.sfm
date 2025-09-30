@@ -1,0 +1,54 @@
+Name "Bee Breeding"
+
+Every tick do
+  Input fe:: from Interface
+  Output fe:: to Breeding,Centrifuge,GeneClicker,GrowClicker,Clicker
+End
+
+Every 20 ticks do
+  Input chorus_flower,draconic_dust from Interface
+  Output retain 2 draconic_dust to DracoBreeding SLOTS 4
+  Output retain 2 draconic_dust to DracoBreeding SLOTS 3
+  Output retain 2 chorus_flower to NormalBreeding SLOTS 4
+  Output retain 2 chorus_flower to NormalBreeding SLOTS 3
+Forget
+  Input glass_bottle from Interface
+  Output retain 10 to GeneBottler
+Forget
+  Input bee_cage from Interface
+  Output retain 32 to each Catcher
+Forget
+  Input from Breeding SLOTS 5
+  Output to GrowClicker
+Forget
+  If redstone = 0 then
+    Input from Catcher slots 2-8
+    Output to Interface
+  Else
+    Input from Catcher slots 2-8
+    Output to GeneClicker
+  End
+Forget
+  Input from GeneClickerChest
+  Output to GeneClicker
+Forget
+  Input productivebees:gene_bottle from GeneBarrel,GeneChest
+  Output to GeneCentrifuge
+Forget
+  Input productivebees:gene from GeneCentrifuge
+  Output to GeneIndexer
+Forget
+  Input from BeeHive slots 2-10
+  Output honeycomb_block to Interface
+  Output to each BeeCentrifuge
+Forget
+  Input fluid:: from BeeCentrifuge
+  Output fluid:: to Interface
+Forget
+  Input from BeeCentrifuge slots 2-10
+  Output to Interface
+Forget
+  Input from SpecialBreedingBarrel
+  Output item:productivebees:* to SpecialBreedingBeeClicker
+  Output except item:productivebees:* to SpecialBreedingItemClicker
+End

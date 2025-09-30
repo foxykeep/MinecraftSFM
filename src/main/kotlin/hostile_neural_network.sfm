@@ -1,0 +1,21 @@
+Name "HNN"
+
+Every tick do
+    Input fe:: from Interface
+    Output fe:: to LootFabricator top side
+    Output fe:: to SimuChamber top side
+End
+
+Every 20 ticks do
+    Input prediction_matrix from Interface
+    Output retain 3 to each SimuChamber top side
+Forget
+    Input from SimuChamber slots 3
+    Output to each LootFabricator top side
+Forget
+    Input from SimuChamber slots 2
+    Output to Interface
+Forget
+    Input item:: from LootFabricator bottom side
+    Output to Interface
+End

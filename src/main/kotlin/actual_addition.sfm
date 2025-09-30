@@ -1,0 +1,14 @@
+Name "ActualAddition"
+
+Every tick do
+  Input fe:: from Interface
+  Output fe:: to Dropper,AtomicReconstructor
+End
+
+Every 20 ticks do
+  Input from Barrel
+  Output to Dropper
+Forget
+  Input from OutputBarrel
+  Output to Interface
+End

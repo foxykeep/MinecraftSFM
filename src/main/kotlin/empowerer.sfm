@@ -1,0 +1,19 @@
+Name "Empowerer"
+
+Every tick do
+  Input fe:: from Interface
+  Output fe:: to DisplayStand
+End
+
+
+-- Enchanting Apparatus
+Every 20 ticks do
+  Input from Barrel slots 1-4
+  Output 1 to each DisplayStand
+Forget
+  Input from Barrel slots 0
+  Output to Empowerer
+Forget
+  Input from Empowerer
+  Output to PatternProvider
+End

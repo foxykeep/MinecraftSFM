@@ -1,0 +1,12 @@
+Name "AE Power"
+
+Every tick do
+  Input fe:: from Magmator
+  Output fe:: to EnergyCube top side
+  Output fe:: to FluxAccessor
+End
+
+Every 20 ticks do
+  Input fluid:: from LavaDrawer
+  Output 8000 fluid:: to each Magmator
+End

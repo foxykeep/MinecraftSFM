@@ -1,0 +1,39 @@
+Name "Mekanism Reactors"
+
+Every tick do
+  Input fe:: from Interface
+  Output fe:: to PowerMachine top side
+  Output fe:: to PowerMachineBottom bottom side
+End
+
+-- Yellow Cake
+Every 20 ticks do
+  Input uranium_ingot from Interface
+  Output to YellowCake top side
+Forget
+  Input from YellowCake bottom side
+  Output to Controller
+End
+
+-- H2/O2
+Every redstone pulse do
+  Input fluid::water from WaterEntanglo bottom side
+  Output fluid:: to WaterInput, H2O2 top side
+Forget
+  Input chemical:: from H2O2 top side
+  Output chemical:: to H2Entanglo top side
+Forget
+  Input chemical:: from H2O2 bottom side
+  Output chemical:: to O2Entanglo top side
+End
+
+-- Fissile Fuel
+Every 20 ticks do
+  Input item:: from Interface, Controller
+  Output 16 sulfur to each SulfurInput top side
+  Output 16 yellow_cake_uranium to each YellowCakeInput top side
+  Output 16 fluorite_block to each FluoriteBlockInput top side
+Forget
+  Input chemical:: from O2Entanglo bottom side
+  Output chemical:: to O2Input top side
+End

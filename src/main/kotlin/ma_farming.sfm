@@ -1,0 +1,18 @@
+Name "Farming"
+
+Every tick do
+  Input fe:: from Interface
+  Output fe:: to GrowthAccelerator top side
+  Output fe:: to Crafter
+End
+
+Every 20 ticks do
+  Input except inferium_essence from Barrel
+  Output to Interface
+Forget
+  Input inferium_essence from Barrel
+  Output to Crafter
+Forget
+  Input insanium_essence from Crafter
+  Output to Interface
+End

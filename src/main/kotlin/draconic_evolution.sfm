@@ -1,0 +1,17 @@
+Name "Draconic Evolution"
+
+Every tick do
+  Input fe:: from FluxAccessor
+  Output fe:: to Injector
+End
+
+Every 20 ticks do
+  Input from Barrel slots 1-8
+  Output 1 to each Injector
+Forget
+  Input from Barrel slots 0
+  Output to CraftingCore
+Forget
+  Input from CraftingCore
+  Output to PatternProvider
+End

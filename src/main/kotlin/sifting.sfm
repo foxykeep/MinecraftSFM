@@ -1,0 +1,49 @@
+Name "Sifting Automation"
+
+Every tick do
+    Input fe:: from Interface
+    Output fe:: to Hammer, Sieve, Crusher top side
+    Output fe:: to Furnace
+End
+
+Every 20 ticks do
+  Input fluid:: from Sink
+  Output 1000 fluid:: to each Barrel
+Forget
+  Input cobblestone from Interface
+  Output 256 to each GravelCrusher top side
+Forget
+  Input sand, gravel from Crusher bottom side
+  Output to Interface
+Forget
+  Input sand from Interface
+  Output 1 sand to each Barrel
+Forget
+  Input soul_sand from Barrel
+  Output soul_sand to SoulSandSieve
+End
+
+Every 20 ticks do
+  Input except blackstone_pebble,*ore*,raw_iesnium, raw_eclipsealloy from Chest
+  Output to Interface
+Forget
+    Input end_stone, netherrack, blackstone, sand from Interface
+    Output 64 end_stone to EndStoneHammer
+    Output 64 netherrack to NetherrackHammer
+    Output 64 blackstone to BlackstoneHammer
+    Output 64 sand to DustHammer
+Forget
+    Input sand, gravel, soul_sand from Interface
+    Output 64 sand to SandSieve
+    Output 64 soul_sand to SoulSandSieve
+    Output 64 gravel to GravelSieve
+Forget
+    Input from SieveDrawer
+    Output to Chest
+Forget
+    Input with #c:ores, raw_iesnium, raw_eclipsealloy from Chest
+    Output to Furnace top side
+Forget
+    Input from Furnace top side
+    Output to Interface
+End

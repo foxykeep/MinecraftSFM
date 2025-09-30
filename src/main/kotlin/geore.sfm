@@ -1,0 +1,39 @@
+Name "GeOre Automation"
+
+Every tick do
+  Input fe:: from Interface
+  Output fe:: to GrowthAccelerator top side
+  Output fe:: to BlockBreaker, Furnace, BlockPlacer, Clicker, BlockPlacer
+End
+
+Every 20 ticks do
+  Input item:: except ancient_debris, uraninite_raw,
+      ancient_debris_shard, raw_ferricore, raw_blazegold
+      from Barrel
+  Output to Interface
+Forget
+  Input ancient_debris, uraninite_raw, raw_ferricore, raw_blazegold
+         from Barrel
+  Output to Furnace top side
+Forget
+  Input from Furnace bottom side
+  Output to Interface
+Forget
+  Input entro_seed from Interface
+  Output retain 2 to FluixClicker
+Forget
+  Input chorus_fruit from Interface
+  Output retain 4 to VoidShimmerClicker
+Forget
+  Input fluix_block from Interface
+  Output retain 2 to FluixBlockPlacer
+Forget
+  Input diamond_block from Interface
+  Output retain 16 to VoidShimmerBlockPlacer
+Forget
+  Input gold_block from Interface
+  Output retain 16 to BlazeGoldBlockPlacer
+Forget
+  Input iron_block from Interface
+  Output retain 16 to FerriCoreBlockPlacer
+End

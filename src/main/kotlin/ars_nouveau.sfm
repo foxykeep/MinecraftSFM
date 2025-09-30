@@ -1,0 +1,25 @@
+Name "Ars Automation"
+
+-- Passive Source Gem/Essence
+Every 20 ticks do
+  Input lapis_lazuli from Interface
+  Output retain 1 to each GemImbuement
+Forget
+  Input source_gem from GemImbuement
+  Output to Interface
+Forget
+  Input source_gem from Interface
+  Output retain 1 to each EssenceImbuement
+Forget
+  Input *_essence from EssenceImbuement
+  Output to Interface
+End
+
+-- Enchanting Apparatus
+Every 20 ticks do
+  Input from Barrel slots 1-8
+  Output 1 to each EnchantingPedestal
+Forget
+  Input from Barrel slots 0
+  Output to EnchantingRouter
+End
