@@ -1,7 +1,7 @@
 Name "Mekanism Reactors"
 
 Every tick do
-  Input fe:: from Interface
+  Input fe:: from Interface, FluxAccessor
   Output fe:: to PowerMachine top side
   Output fe:: to PowerMachineBottom bottom side
 End
@@ -36,4 +36,23 @@ Every 20 ticks do
 Forget
   Input chemical:: from O2Entanglo bottom side
   Output chemical:: to O2Input top side
+End
+
+-- Pellet
+Every 20+5 ticks do
+  Input fluid::water from WaterEntanglo bottom side
+  Input fluorite_dust from Interface
+  Output fluid::, item:: to PelletChamber top side
+Forget
+  Input item:: from PelletChamber bottom side
+  Output to Interface
+End
+
+-- Deuterium
+Every redstone pulse do
+  Input chemical:: from Deuterium bottom side
+  Output 16000 chemical:: to DeuteriumEntanglo top side
+Forget
+  Input chemical:: from Deuterium top side
+  Output 16000 chemical:: to O2Entanglo top side
 End
